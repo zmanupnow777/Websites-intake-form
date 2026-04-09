@@ -5,134 +5,232 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website Brief — Mindelo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── Tokens ── */
   :root {
-    --navy:       #0d1b2a;
-    --navy-mid:   #162336;
-    --navy-light: #1e3050;
-    --accent:     #f5a623;
-    --accent-dim: rgba(245,166,35,0.12);
-    --white:      #f8f5f0;
-    --muted:      rgba(248,245,240,0.52);
-    --border:     rgba(248,245,240,0.1);
-    --radius:     10px;
+    --bg:        #0d0c0a;
+    --surface:   #161411;
+    --surface2:  #1e1b17;
+    --gold:      #e9a020;
+    --gold-10:   rgba(233,160,32,0.10);
+    --gold-06:   rgba(233,160,32,0.06);
+    --gold-03:   rgba(233,160,32,0.03);
+    --cream:     #f2ede4;
+    --muted:     rgba(242,237,228,0.44);
+    --border:    rgba(242,237,228,0.09);
+    --radius:    10px;
   }
 
   body {
-    background: var(--navy);
-    color: var(--white);
+    background:
+      radial-gradient(ellipse 80% 60% at -5% 5%,  rgba(233,160,32,0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 105% 95%, rgba(233,160,32,0.035) 0%, transparent 55%),
+      var(--bg);
+    color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     line-height: 1.65;
     min-height: 100vh;
   }
 
-  /* ── Layout ── */
+  /* Subtle noise grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
   .page {
-    max-width: 660px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 52px 24px 100px;
+    padding: 48px 24px 100px;
+    position: relative;
   }
 
   /* ── Brand ── */
   .brand {
     font-family: 'Syne', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 44px;
+    color: var(--gold);
+    margin-bottom: 56px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
-  .brand-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--gold);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0;
+    color: var(--gold);
     flex-shrink: 0;
   }
 
   /* ── Hero ── */
-  .hero { margin-bottom: 48px; }
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(30px, 6vw, 44px);
-    font-weight: 800;
-    line-height: 1.13;
-    color: var(--white);
-    margin-bottom: 16px;
+  .hero {
+    margin-bottom: 52px;
   }
-  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 9vw, 68px);
+    font-weight: 500;
+    line-height: 1.04;
+    color: var(--cream);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
   .hero p {
     color: var(--muted);
-    font-size: 15px;
-    max-width: 500px;
-    line-height: 1.75;
+    font-size: 14px;
+    max-width: 400px;
+    line-height: 1.85;
+    font-weight: 300;
   }
 
-  /* ── Progress ── */
-  .progress-track {
-    height: 2px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-bottom: 44px;
-    overflow: hidden;
+  /* ── Step tracker ── */
+  .tracker {
+    display: flex;
+    align-items: center;
+    margin-bottom: 52px;
   }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 2px;
-    transition: width 0.4s cubic-bezier(.4,0,.2,1);
-  }
-
-  /* ── Step ── */
-  .step { display: none; }
-  .step.active {
-    display: block;
-    animation: rise 0.3s ease;
-  }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .step-tag {
+  .tr-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
     font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .tr-dot.done {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
   }
-  .step h2 {
+  .tr-dot.done .tr-num { display: none; }
+  .tr-dot.done::before { content: '✓'; }
+  .tr-dot.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 0 0 4px var(--gold-10);
+  }
+  .tr-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    transition: background 0.35s ease;
+    min-width: 6px;
+  }
+  .tr-line.done { background: var(--gold); }
+
+  @media (max-width: 380px) {
+    .tr-dot { width: 20px; height: 20px; font-size: 8px; }
+  }
+
+  /* ── Steps ── */
+  .step { display: none; position: relative; overflow: visible; }
+  .step.active { display: block; }
+
+  /* Large watermark number */
+  .step-num-bg {
+    position: absolute;
+    top: -30px;
+    right: -8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 170px;
+    font-weight: 600;
+    line-height: 1;
+    color: rgba(233,160,32,0.035);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .step-content { position: relative; z-index: 1; }
+
+  @keyframes slideInForward {
+    from { opacity: 0; transform: translateX(36px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInBack {
+    from { opacity: 0; transform: translateX(-36px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-label {
     font-family: 'Syne', sans-serif;
-    font-size: 22px;
+    font-size: 10px;
     font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 10px;
   }
-  .step .hint {
+
+  .step h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5.5vw, 38px);
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .step h2 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+
+  .hint {
     font-size: 13px;
     color: var(--muted);
-    margin-bottom: 28px;
+    margin-bottom: 32px;
+    font-weight: 300;
+    line-height: 1.75;
   }
 
   /* ── Fields ── */
   .field { margin-bottom: 22px; }
   .field label {
     display: block;
-    font-size: 13px;
-    font-weight: 500;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   textarea,
@@ -140,59 +238,116 @@
   input[type="email"],
   input[type="tel"] {
     width: 100%;
-    background: var(--navy-mid);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    color: var(--white);
+    color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
-    line-height: 1.6;
-    padding: 12px 16px;
+    line-height: 1.65;
+    padding: 13px 17px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     resize: vertical;
     appearance: none;
   }
-  textarea { min-height: 88px; }
+  textarea { min-height: 90px; }
+
   textarea:focus,
-  input:focus { border-color: var(--accent); }
-  ::placeholder { color: rgba(248,245,240,0.22); }
+  input:focus {
+    border-color: rgba(233,160,32,0.5);
+    box-shadow: 0 0 0 3px var(--gold-06);
+  }
+  ::placeholder { color: rgba(242,237,228,0.17); }
+
+  input.err, textarea.err {
+    border-color: rgba(220,80,80,0.55) !important;
+    box-shadow: 0 0 0 3px rgba(220,80,80,0.08) !important;
+  }
+
+  .field-error {
+    font-size: 12px;
+    color: #e06060;
+    margin-top: 6px;
+    display: none;
+    font-weight: 400;
+  }
+  .field-error.show { display: block; }
+
+  .char-count {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+    opacity: 0.45;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.04em;
+  }
 
   /* ── Pills ── */
   .pills { display: flex; flex-wrap: wrap; gap: 8px; }
   .pills.column { flex-direction: column; }
+
   .pill {
-    background: var(--navy-mid);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 100px;
     color: var(--muted);
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     font-weight: 400;
-    padding: 8px 18px;
+    padding: 9px 20px;
     cursor: pointer;
-    transition: border-color 0.18s, color 0.18s, background 0.18s;
+    transition: border-color 0.18s, color 0.18s, background 0.18s, box-shadow 0.18s;
     user-select: none;
     line-height: 1.4;
+    position: relative;
   }
-  .pill:hover { border-color: rgba(245,166,35,0.5); color: var(--white); }
+  .pills.column .pill {
+    border-radius: var(--radius);
+  }
+  .pill:hover {
+    border-color: rgba(233,160,32,0.38);
+    color: var(--cream);
+    background: var(--surface2);
+  }
   .pill.sel {
-    background: rgba(245,166,35,0.12);
-    border-color: var(--accent);
-    color: var(--accent);
+    background: var(--gold-10);
+    border-color: var(--gold);
+    color: var(--cream);
     font-weight: 500;
+    padding-right: 36px;
+  }
+  .pill.sel::after {
+    content: '✓';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .pills.column .pill.sel {
+    padding-right: 36px;
   }
 
-  /* ── Two-col ── */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 500px) { .two-col { grid-template-columns: 1fr; } }
+  /* ── Layout helpers ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ── Nav ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0 26px;
+  }
+
+  /* ── Navigation ── */
   .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 36px;
+    margin-top: 40px;
     gap: 12px;
   }
   .nav-spacer { flex: 1; }
@@ -203,89 +358,108 @@
     border-radius: var(--radius);
     color: var(--muted);
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 12px 22px;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
+    letter-spacing: 0.01em;
   }
-  .btn-back:hover { border-color: rgba(245,166,35,0.4); color: var(--white); }
+  .btn-back:hover {
+    border-color: rgba(233,160,32,0.35);
+    color: var(--cream);
+  }
 
   .btn-next {
-    background: var(--accent);
+    background: var(--gold);
     border: none;
     border-radius: var(--radius);
-    color: var(--navy);
+    color: #0d0c0a;
     font-family: 'Syne', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    padding: 13px 26px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 30px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: background 0.2s, transform 0.15s;
+    gap: 10px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   }
-  .btn-next:hover { background: #f8b93e; transform: translateY(-1px); }
+  .btn-next:hover {
+    background: #f2aa28;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(233,160,32,0.22);
+  }
+  .btn-next:active { transform: translateY(0); box-shadow: none; }
 
   /* ── Success ── */
   .success {
     display: none;
-    text-align: center;
-    padding: 48px 0 0;
-    animation: rise 0.4s ease;
+    padding: 52px 0 0;
+    animation: slideInForward 0.4s ease;
   }
   .success.show { display: block; }
 
   .tick {
-    width: 64px; height: 64px;
-    background: rgba(245,166,35,0.1);
-    border: 1.5px solid var(--accent);
+    width: 54px;
+    height: 54px;
+    background: var(--gold-10);
+    border: 1.5px solid var(--gold);
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 26px;
-    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 26px;
   }
+
   .success h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--cream);
     margin-bottom: 12px;
+    line-height: 1.1;
   }
   .success > p {
     color: var(--muted);
-    max-width: 400px;
-    margin: 0 auto 36px;
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 300;
+    max-width: 380px;
+    line-height: 1.85;
+    margin-bottom: 36px;
   }
 
   .summary {
-    background: var(--navy-mid);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 22px 24px;
-    text-align: left;
     font-size: 13px;
-    line-height: 1.9;
-    max-height: 300px;
+    line-height: 2;
+    max-height: 280px;
     overflow-y: auto;
     margin-bottom: 20px;
     scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--navy-light);
+    scrollbar-color: rgba(233,160,32,0.25) transparent;
   }
   .summary h3 {
     font-family: 'Syne', sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--gold);
+    opacity: 0.65;
     margin-bottom: 14px;
   }
-  .s-row { margin-bottom: 4px; }
+  .s-row { margin-bottom: 2px; }
   .s-key { color: var(--muted); }
-  .s-val { color: var(--white); font-weight: 500; }
+  .s-val { color: var(--cream); font-weight: 500; }
 
   .btn-copy {
     background: transparent;
@@ -294,223 +468,266 @@
     color: var(--muted);
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
-    padding: 10px 22px;
+    padding: 11px 24px;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
   }
-  .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-copy:hover { border-color: var(--gold); color: var(--gold); }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <div class="brand"><span class="brand-dot"></span> Mindelo</div>
-
-  <div class="hero">
-    <h1>Tell us about your<br><em>website project.</em></h1>
-    <p>Answer seven quick questions and we'll put together a tailored brief — no generic templates, no fluff.</p>
+  <div class="brand">
+    <div class="brand-mark">M</div>
+    Mindelo
   </div>
 
-  <div class="progress-track">
-    <div class="progress-fill" id="prog" style="width:14%"></div>
+  <div class="hero">
+    <h1>Tell us about<br>your <em>website.</em></h1>
+    <p>Seven questions. A tailored brief.<br>No generic templates, no fluff.</p>
+  </div>
+
+  <!-- Step tracker -->
+  <div class="tracker" id="tracker">
+    <div class="tr-dot active" id="td1"><span class="tr-num">1</span></div>
+    <div class="tr-line" id="tl1"></div>
+    <div class="tr-dot" id="td2"><span class="tr-num">2</span></div>
+    <div class="tr-line" id="tl2"></div>
+    <div class="tr-dot" id="td3"><span class="tr-num">3</span></div>
+    <div class="tr-line" id="tl3"></div>
+    <div class="tr-dot" id="td4"><span class="tr-num">4</span></div>
+    <div class="tr-line" id="tl4"></div>
+    <div class="tr-dot" id="td5"><span class="tr-num">5</span></div>
+    <div class="tr-line" id="tl5"></div>
+    <div class="tr-dot" id="td6"><span class="tr-num">6</span></div>
+    <div class="tr-line" id="tl6"></div>
+    <div class="tr-dot" id="td7"><span class="tr-num">7</span></div>
   </div>
 
   <!-- ── STEP 1 ── -->
   <div class="step active" id="s1">
-    <div class="step-tag">Step 1 of 7</div>
-    <h2>About your business</h2>
-    <p class="hint">Tell us who you are and what you offer.</p>
+    <div class="step-num-bg">1</div>
+    <div class="step-content">
+      <div class="step-label">Step 1 of 7</div>
+      <h2>About your <em>business</em></h2>
+      <p class="hint">Tell us who you are and what you offer.</p>
 
-    <div class="field">
-      <label>Business name</label>
-      <input type="text" id="f_name" placeholder="e.g. Coastal Plumbing Ltd">
-    </div>
-    <div class="field">
-      <label>What do you sell or do?</label>
-      <textarea id="f_desc" placeholder="e.g. We supply industrial valves, gaskets, and seals to manufacturers across Trinidad &amp; Tobago"></textarea>
-    </div>
-    <div class="field">
-      <label>Contact email</label>
-      <input type="email" id="f_email" placeholder="you@yourbusiness.com">
-    </div>
+      <div class="field">
+        <label>Business name</label>
+        <input type="text" id="f_name" placeholder="e.g. Coastal Plumbing Ltd">
+        <div class="field-error" id="err_name">Please enter your business name</div>
+      </div>
+      <div class="field">
+        <label>What do you sell or do?</label>
+        <textarea id="f_desc" placeholder="e.g. We supply industrial valves, gaskets, and seals to manufacturers across Trinidad &amp; Tobago"></textarea>
+      </div>
+      <div class="field">
+        <label>Contact email</label>
+        <input type="email" id="f_email" placeholder="you@yourbusiness.com">
+        <div class="field-error" id="err_email">Please enter a valid email address</div>
+      </div>
 
-    <div class="nav">
-      <span class="nav-spacer"></span>
-      <button class="btn-next" onclick="next(1)">Next →</button>
+      <div class="nav">
+        <span class="nav-spacer"></span>
+        <button class="btn-next" onclick="next(1)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 2 ── -->
   <div class="step" id="s2">
-    <div class="step-tag">Step 2 of 7</div>
-    <h2>Goal &amp; audience</h2>
-    <p class="hint">What should this website primarily achieve, and who is it for?</p>
+    <div class="step-num-bg">2</div>
+    <div class="step-content">
+      <div class="step-label">Step 2 of 7</div>
+      <h2>Goal &amp; <em>audience</em></h2>
+      <p class="hint">What should this website primarily achieve, and who is it for?</p>
 
-    <div class="field">
-      <label>Primary goal</label>
-      <div class="pills" id="pg_goal" data-multi="false">
-        <div class="pill" data-v="Get more leads and enquiries">Get more leads and enquiries</div>
-        <div class="pill" data-v="Showcase services / portfolio">Showcase services / portfolio</div>
-        <div class="pill" data-v="Sell products online">Sell products online</div>
-        <div class="pill" data-v="Build credibility and trust">Build credibility and trust</div>
-        <div class="pill" data-v="Replace an outdated website">Replace an outdated website</div>
-        <div class="pill" data-v="__other__">Other</div>
+      <div class="field">
+        <label>Primary goal</label>
+        <div class="pills" id="pg_goal" data-multi="false">
+          <div class="pill" data-v="Get more leads and enquiries">Get more leads and enquiries</div>
+          <div class="pill" data-v="Showcase services / portfolio">Showcase services / portfolio</div>
+          <div class="pill" data-v="Sell products online">Sell products online</div>
+          <div class="pill" data-v="Build credibility and trust">Build credibility and trust</div>
+          <div class="pill" data-v="Replace an outdated website">Replace an outdated website</div>
+          <div class="pill" data-v="__other__">Other</div>
+        </div>
       </div>
-    </div>
-    <div class="field" id="goal_other" style="display:none">
-      <input type="text" id="f_goal_other" placeholder="Describe your goal">
-    </div>
-    <div class="field">
-      <label>Who is your target customer?</label>
-      <textarea id="f_audience" placeholder="e.g. Plant managers and procurement officers at petrochemical companies in T&T"></textarea>
-    </div>
+      <div class="field" id="goal_other" style="display:none">
+        <input type="text" id="f_goal_other" placeholder="Describe your goal">
+      </div>
+      <div class="field">
+        <label>Who is your target customer?</label>
+        <textarea id="f_audience" placeholder="e.g. Plant managers and procurement officers at petrochemical companies in T&amp;T"></textarea>
+      </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(2)">← Back</button>
-      <button class="btn-next" onclick="next(2)">Next →</button>
+      <div class="nav">
+        <button class="btn-back" onclick="back(2)">← Back</button>
+        <button class="btn-next" onclick="next(2)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 3 ── -->
   <div class="step" id="s3">
-    <div class="step-tag">Step 3 of 7</div>
-    <h2>Pages needed</h2>
-    <p class="hint">Select all the pages you want. You can always add more later.</p>
+    <div class="step-num-bg">3</div>
+    <div class="step-content">
+      <div class="step-label">Step 3 of 7</div>
+      <h2>Pages <em>needed</em></h2>
+      <p class="hint">Select all the pages you want. You can always add more later.</p>
 
-    <div class="field">
-      <div class="pills" id="pg_pages" data-multi="true">
-        <div class="pill" data-v="Home">Home</div>
-        <div class="pill" data-v="About">About</div>
-        <div class="pill" data-v="Services">Services</div>
-        <div class="pill" data-v="Products">Products</div>
-        <div class="pill" data-v="Portfolio / Gallery">Portfolio / Gallery</div>
-        <div class="pill" data-v="Testimonials">Testimonials</div>
-        <div class="pill" data-v="Blog / News">Blog / News</div>
-        <div class="pill" data-v="FAQ">FAQ</div>
-        <div class="pill" data-v="Contact">Contact</div>
+      <div class="field">
+        <div class="pills" id="pg_pages" data-multi="true">
+          <div class="pill" data-v="Home">Home</div>
+          <div class="pill" data-v="About">About</div>
+          <div class="pill" data-v="Services">Services</div>
+          <div class="pill" data-v="Products">Products</div>
+          <div class="pill" data-v="Portfolio / Gallery">Portfolio / Gallery</div>
+          <div class="pill" data-v="Testimonials">Testimonials</div>
+          <div class="pill" data-v="Blog / News">Blog / News</div>
+          <div class="pill" data-v="FAQ">FAQ</div>
+          <div class="pill" data-v="Contact">Contact</div>
+        </div>
       </div>
-    </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(3)">← Back</button>
-      <button class="btn-next" onclick="next(3)">Next →</button>
+      <div class="nav">
+        <button class="btn-back" onclick="back(3)">← Back</button>
+        <button class="btn-next" onclick="next(3)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 4 ── -->
   <div class="step" id="s4">
-    <div class="step-tag">Step 4 of 7</div>
-    <h2>Features &amp; functionality</h2>
-    <p class="hint">Beyond displaying information — what does the site need to do?</p>
+    <div class="step-num-bg">4</div>
+    <div class="step-content">
+      <div class="step-label">Step 4 of 7</div>
+      <h2>Features &amp; <em>functionality</em></h2>
+      <p class="hint">Beyond displaying information — what does the site need to do?</p>
 
-    <div class="field">
-      <div class="pills" id="pg_features" data-multi="true">
-        <div class="pill" data-v="Contact / enquiry form">Contact / enquiry form</div>
-        <div class="pill" data-v="WhatsApp button">WhatsApp button</div>
-        <div class="pill" data-v="Quote request form">Quote request form</div>
-        <div class="pill" data-v="Online booking / scheduling">Online booking / scheduling</div>
-        <div class="pill" data-v="Product catalogue">Product catalogue</div>
-        <div class="pill" data-v="Online payments">Online payments</div>
-        <div class="pill" data-v="Live chat / chatbot">Live chat / chatbot</div>
-        <div class="pill" data-v="Newsletter signup">Newsletter signup</div>
-        <div class="pill" data-v="None needed">None needed</div>
+      <div class="field">
+        <div class="pills" id="pg_features" data-multi="true">
+          <div class="pill" data-v="Contact / enquiry form">Contact / enquiry form</div>
+          <div class="pill" data-v="WhatsApp button">WhatsApp button</div>
+          <div class="pill" data-v="Quote request form">Quote request form</div>
+          <div class="pill" data-v="Online booking / scheduling">Online booking / scheduling</div>
+          <div class="pill" data-v="Product catalogue">Product catalogue</div>
+          <div class="pill" data-v="Online payments">Online payments</div>
+          <div class="pill" data-v="Live chat / chatbot">Live chat / chatbot</div>
+          <div class="pill" data-v="Newsletter signup">Newsletter signup</div>
+          <div class="pill" data-v="None needed">None needed</div>
+        </div>
       </div>
-    </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(4)">← Back</button>
-      <button class="btn-next" onclick="next(4)">Next →</button>
+      <div class="nav">
+        <button class="btn-back" onclick="back(4)">← Back</button>
+        <button class="btn-next" onclick="next(4)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 5 ── -->
   <div class="step" id="s5">
-    <div class="step-tag">Step 5 of 7</div>
-    <h2>Look and feel</h2>
-    <p class="hint">What vibe should the site give off? Pick all that apply.</p>
+    <div class="step-num-bg">5</div>
+    <div class="step-content">
+      <div class="step-label">Step 5 of 7</div>
+      <h2>Look &amp; <em>feel</em></h2>
+      <p class="hint">What vibe should the site give off? Pick all that apply.</p>
 
-    <div class="field">
-      <div class="pills" id="pg_feel" data-multi="true">
-        <div class="pill" data-v="Clean and minimal">Clean and minimal</div>
-        <div class="pill" data-v="Bold and modern">Bold and modern</div>
-        <div class="pill" data-v="Professional / corporate">Professional / corporate</div>
-        <div class="pill" data-v="Warm and approachable">Warm and approachable</div>
-        <div class="pill" data-v="Industrial / technical">Industrial / technical</div>
-        <div class="pill" data-v="Vibrant / colourful">Vibrant / colourful</div>
-        <div class="pill" data-v="Luxury / premium">Luxury / premium</div>
+      <div class="field">
+        <div class="pills" id="pg_feel" data-multi="true">
+          <div class="pill" data-v="Clean and minimal">Clean and minimal</div>
+          <div class="pill" data-v="Bold and modern">Bold and modern</div>
+          <div class="pill" data-v="Professional / corporate">Professional / corporate</div>
+          <div class="pill" data-v="Warm and approachable">Warm and approachable</div>
+          <div class="pill" data-v="Industrial / technical">Industrial / technical</div>
+          <div class="pill" data-v="Vibrant / colourful">Vibrant / colourful</div>
+          <div class="pill" data-v="Luxury / premium">Luxury / premium</div>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label>Any websites you admire the look of?</label>
-      <textarea id="f_inspo" placeholder="Paste URLs, or describe what you like — e.g. 'something dark and bold with large text'"></textarea>
-    </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(5)">← Back</button>
-      <button class="btn-next" onclick="next(5)">Next →</button>
+      <div class="divider"></div>
+
+      <div class="field">
+        <label>Any websites you admire the look of?</label>
+        <textarea id="f_inspo" placeholder="Paste URLs, or describe what you like — e.g. 'something dark and bold with large text'"></textarea>
+      </div>
+
+      <div class="nav">
+        <button class="btn-back" onclick="back(5)">← Back</button>
+        <button class="btn-next" onclick="next(5)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 6 ── -->
   <div class="step" id="s6">
-    <div class="step-tag">Step 6 of 7</div>
-    <h2>Assets &amp; budget</h2>
-    <p class="hint">What do you already have ready, and what are you working with?</p>
+    <div class="step-num-bg">6</div>
+    <div class="step-content">
+      <div class="step-label">Step 6 of 7</div>
+      <h2>Assets &amp; <em>budget</em></h2>
+      <p class="hint">What do you already have ready, and what are you working with?</p>
 
-    <div class="field">
-      <label>Existing assets (select all you have)</label>
-      <div class="pills" id="pg_assets" data-multi="true">
-        <div class="pill" data-v="Logo">Logo</div>
-        <div class="pill" data-v="Brand colours">Brand colours</div>
-        <div class="pill" data-v="Photos of business / products">Photos</div>
-        <div class="pill" data-v="Written content (text ready)">Written content</div>
-        <div class="pill" data-v="Existing website to reference">Existing website</div>
-        <div class="pill" data-v="None yet">None yet</div>
-      </div>
-    </div>
-
-    <div class="two-col">
       <div class="field">
-        <label>Approximate budget</label>
-        <div class="pills column" id="pg_budget" data-multi="false">
-          <div class="pill" data-v="Under TT$3,000">Under TT$3,000</div>
-          <div class="pill" data-v="TT$3,000 – 6,000">TT$3,000 – 6,000</div>
-          <div class="pill" data-v="TT$6,000 – 10,000">TT$6,000 – 10,000</div>
-          <div class="pill" data-v="TT$10,000+">TT$10,000+</div>
-          <div class="pill" data-v="Not sure yet">Not sure yet</div>
+        <label>Existing assets — select all you have</label>
+        <div class="pills" id="pg_assets" data-multi="true">
+          <div class="pill" data-v="Logo">Logo</div>
+          <div class="pill" data-v="Brand colours">Brand colours</div>
+          <div class="pill" data-v="Photos of business / products">Photos</div>
+          <div class="pill" data-v="Written content (text ready)">Written content</div>
+          <div class="pill" data-v="Existing website to reference">Existing website</div>
+          <div class="pill" data-v="None yet">None yet</div>
         </div>
       </div>
-      <div class="field">
-        <label>Timeline needed</label>
-        <div class="pills column" id="pg_timeline" data-multi="false">
-          <div class="pill" data-v="ASAP">ASAP</div>
-          <div class="pill" data-v="Within 2 weeks">Within 2 weeks</div>
-          <div class="pill" data-v="Within a month">Within a month</div>
-          <div class="pill" data-v="No firm deadline">No firm deadline</div>
+
+      <div class="two-col">
+        <div class="field">
+          <label>Approximate budget</label>
+          <div class="pills column" id="pg_budget" data-multi="false">
+            <div class="pill" data-v="Under TT$3,000">Under TT$3,000</div>
+            <div class="pill" data-v="TT$3,000 – 6,000">TT$3,000 – 6,000</div>
+            <div class="pill" data-v="TT$6,000 – 10,000">TT$6,000 – 10,000</div>
+            <div class="pill" data-v="TT$10,000+">TT$10,000+</div>
+            <div class="pill" data-v="Not sure yet">Not sure yet</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Timeline needed</label>
+          <div class="pills column" id="pg_timeline" data-multi="false">
+            <div class="pill" data-v="ASAP">ASAP</div>
+            <div class="pill" data-v="Within 2 weeks">Within 2 weeks</div>
+            <div class="pill" data-v="Within a month">Within a month</div>
+            <div class="pill" data-v="No firm deadline">No firm deadline</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(6)">← Back</button>
-      <button class="btn-next" onclick="next(6)">Next →</button>
+      <div class="nav">
+        <button class="btn-back" onclick="back(6)">← Back</button>
+        <button class="btn-next" onclick="next(6)">Continue →</button>
+      </div>
     </div>
   </div>
 
   <!-- ── STEP 7 ── -->
   <div class="step" id="s7">
-    <div class="step-tag">Step 7 of 7</div>
-    <h2>Anything else?</h2>
-    <p class="hint">Any final details, concerns, or context that will help us do a better job.</p>
+    <div class="step-num-bg">7</div>
+    <div class="step-content">
+      <div class="step-label">Step 7 of 7</div>
+      <h2>Anything <em>else?</em></h2>
+      <p class="hint">Final details, concerns, or context that will help us do a better job.</p>
 
-    <div class="field">
-      <textarea id="f_notes" style="min-height:130px"
-        placeholder="e.g. We want to stand out from competitors who all have very dated websites. It also needs to work well on mobile since most of our customers use phones."></textarea>
-    </div>
+      <div class="field">
+        <textarea id="f_notes" style="min-height:140px"
+          placeholder="e.g. We want to stand out from competitors who all have very dated websites. It also needs to work well on mobile since most of our customers use phones."></textarea>
+        <div class="char-count" id="notes_count">0 / 500</div>
+      </div>
 
-    <div class="nav">
-      <button class="btn-back" onclick="back(7)">← Back</button>
-      <button class="btn-next" onclick="submit()">Submit brief →</button>
+      <div class="nav">
+        <button class="btn-back" onclick="back(7)">← Back</button>
+        <button class="btn-next" onclick="submit()">Submit brief →</button>
+      </div>
     </div>
   </div>
 
@@ -527,17 +744,10 @@
     <button class="btn-copy" id="copyBtn" onclick="copyBrief()">Copy brief to clipboard</button>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-/* ── CONFIG ── easily re-skin per client ── */
-const CONFIG = {
-  brand:      "Mindelo",
-  totalSteps: 7,
-  accentHex:  "#f5a623",
-};
-
-/* ── State ── */
+const CONFIG = { brand: "Mindelo", totalSteps: 7 };
 const S = {};
 let cur = 1;
 
@@ -546,11 +756,8 @@ document.querySelectorAll('.pills').forEach(group => {
   group.querySelectorAll('.pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const multi = group.dataset.multi === 'true';
-      if (!multi) {
-        group.querySelectorAll('.pill').forEach(p => p.classList.remove('sel'));
-      }
+      if (!multi) group.querySelectorAll('.pill').forEach(p => p.classList.remove('sel'));
       pill.classList.toggle('sel');
-      /* Show/hide "Other" free text for goal step */
       if (group.id === 'pg_goal') {
         const hasOther = !!group.querySelector('.pill[data-v="__other__"].sel');
         document.getElementById('goal_other').style.display = hasOther ? 'block' : 'none';
@@ -559,35 +766,98 @@ document.querySelectorAll('.pills').forEach(group => {
   });
 });
 
+/* ── Char counter ── */
+const notesEl = document.getElementById('f_notes');
+notesEl.addEventListener('input', () => {
+  document.getElementById('notes_count').textContent = notesEl.value.length + ' / 500';
+});
+
+/* ── Tracker update ── */
+function updateTracker(step) {
+  for (let i = 1; i <= 7; i++) {
+    const dot = document.getElementById('td' + i);
+    dot.className = 'tr-dot';
+    if (i < step)       dot.classList.add('done');
+    else if (i === step) dot.classList.add('active');
+    if (i < 7) {
+      const line = document.getElementById('tl' + i);
+      line.className = 'tr-line' + (i < step ? ' done' : '');
+    }
+  }
+}
+
+/* ── Navigation ── */
+function setStep(n, backwards) {
+  const from = document.getElementById('s' + cur);
+  from.classList.remove('active');
+  from.style.display = 'none';
+
+  cur = n;
+
+  const to = document.getElementById('s' + cur);
+  to.style.display = 'block';
+  to.style.animation = 'none';
+  to.offsetHeight; // force reflow
+  to.style.animation = backwards
+    ? 'slideInBack 0.32s cubic-bezier(0.25,0.46,0.45,0.94)'
+    : 'slideInForward 0.32s cubic-bezier(0.25,0.46,0.45,0.94)';
+  to.classList.add('active');
+
+  updateTracker(cur);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── Validation ── */
+function validate(step) {
+  if (step !== 1) return true;
+
+  let ok = true;
+  const name = document.getElementById('f_name');
+  const email = document.getElementById('f_email');
+
+  if (!name.value.trim()) {
+    name.classList.add('err');
+    document.getElementById('err_name').classList.add('show');
+    ok = false;
+  } else {
+    name.classList.remove('err');
+    document.getElementById('err_name').classList.remove('show');
+  }
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+  if (!emailOk) {
+    email.classList.add('err');
+    document.getElementById('err_email').classList.add('show');
+    ok = false;
+  } else {
+    email.classList.remove('err');
+    document.getElementById('err_email').classList.remove('show');
+  }
+
+  return ok;
+}
+
+function next(from) {
+  if (!validate(from)) return;
+  save(from);
+  setStep(from + 1, false);
+}
+
+function back(from) {
+  setStep(from - 1, true);
+}
+
+/* ── Save ── */
 function getVals(groupId) {
   return Array.from(document.querySelectorAll('#' + groupId + ' .pill.sel'))
     .map(p => p.dataset.v).filter(v => v !== '__other__');
 }
 
-/* ── Navigation ── */
-function setStep(n) {
-  document.getElementById('s' + cur).classList.remove('active');
-  cur = n;
-  document.getElementById('s' + cur).classList.add('active');
-  document.getElementById('prog').style.width = Math.round((cur / CONFIG.totalSteps) * 100) + '%';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function next(from) {
-  save(from);
-  setStep(from + 1);
-}
-
-function back(from) {
-  setStep(from - 1);
-}
-
-/* ── Save ── */
 function save(step) {
   if (step === 1) {
-    S.name    = document.getElementById('f_name').value.trim();
-    S.desc    = document.getElementById('f_desc').value.trim();
-    S.email   = document.getElementById('f_email').value.trim();
+    S.name  = document.getElementById('f_name').value.trim();
+    S.desc  = document.getElementById('f_desc').value.trim();
+    S.email = document.getElementById('f_email').value.trim();
   } else if (step === 2) {
     const goals = getVals('pg_goal');
     const other = document.getElementById('f_goal_other').value.trim();
@@ -602,7 +872,7 @@ function save(step) {
     S.feel  = getVals('pg_feel').join(', ');
     S.inspo = document.getElementById('f_inspo').value.trim();
   } else if (step === 6) {
-    S.assets   = getVals('pg_assets').join('');
+    S.assets   = getVals('pg_assets').join(', ');
     S.budget   = getVals('pg_budget').join('');
     S.timeline = getVals('pg_timeline').join('');
   } else if (step === 7) {
@@ -613,8 +883,8 @@ function save(step) {
 /* ── Submit ── */
 function submit() {
   save(7);
-  document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
-  document.getElementById('prog').style.width = '100%';
+  document.querySelectorAll('.step').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+  document.getElementById('tracker').style.display = 'none';
 
   const LABELS = [
     ['Business name',   S.name],
@@ -632,8 +902,7 @@ function submit() {
     ['Notes',           S.notes],
   ];
 
-  const rows = document.getElementById('summaryRows');
-  rows.innerHTML = LABELS
+  document.getElementById('summaryRows').innerHTML = LABELS
     .filter(([, v]) => v)
     .map(([k, v]) => `<div class="s-row"><span class="s-key">${k}: </span><span class="s-val">${v}</span></div>`)
     .join('');
@@ -650,7 +919,7 @@ function copyBrief() {
     ['Assets', S.assets], ['Budget', S.budget], ['Timeline', S.timeline],
     ['Notes', S.notes],
   ];
-  const txt = LABELS.filter(([,v]) => v).map(([k,v]) => `${k}: ${v}`).join('\n');
+  const txt = LABELS.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
   navigator.clipboard.writeText(txt).then(() => {
     const btn = document.getElementById('copyBtn');
     btn.textContent = 'Copied ✓';
